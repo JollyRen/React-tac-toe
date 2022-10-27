@@ -100,7 +100,6 @@ const App = () => {
   }
   const handleToWin = (e) => {
     let node = e.target
-    console.dir(node)
     setToWin(inputToWin)
   }
   const handleMove = (e) => {
@@ -112,7 +111,6 @@ const App = () => {
         setBoard(newBoard)
         setAvailableMoves(availableMoves - 1)
         checkWin()
-        console.log(availableMoves)
         if (!isFinished) setCurrentPlayer(currentPlayer == 'X' ? 'O' : 'X')
       }
     }
@@ -141,6 +139,7 @@ const App = () => {
     if (id.includes('1')) setInputPlayer1(value)
     if (id.includes('2')) setInputPlayer2(value)
     if (id.includes('win')) setInputToWin(value)
+    setAvailableMoves((toWin * toWin) - 1)
   }
 
   const handleReset = () => {
@@ -189,6 +188,9 @@ const App = () => {
         <div id="winner-container">
         <h2 id="winner-text">It's a draw! Reset the Game to Play again!</h2>
       </div>
+      }
+      {
+        !isFinished && <div id="winner-container"><h2>&nbsp;</h2></div>
       }
       {/* <Board /> */}
       <div id="board" onClick={(e) => {
